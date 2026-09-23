@@ -8,6 +8,11 @@ import org.junit.jupiter.api.Test;
 public class calculatorTest {
 
     calculator calculator = new calculator();
+    
+    @Test
+    void testModulus() {
+        assertEquals(1, calculator.modulus(10, 3));
+    }
 
     @Test
     void testAddition() {
