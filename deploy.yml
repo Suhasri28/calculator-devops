@@ -1,0 +1,28 @@
+---
+- name: Deploy Calculator Application
+  hosts: app_servers
+  connection: local
+  become: false
+
+  tasks:
+
+    - name: Create application directory
+      ansible.builtin.file:
+        path: /tmp/calculator
+        state: directory
+        mode: '0755'
+
+    - name: Copy calculator JAR
+      ansible.builtin.copy:
+        src: target/calculator-0.0.1-SNAPSHOT.jar
+        dest: /tmp/calculator/calculator.jar
+        mode: '0755'
+
+    - name: Run calculator application
+      ansible.builtin.shell:
+        cmd: "java -jar /tmp/calculator/calculator.jar"
+      register: calculator_output
+
+    - name: Display calculator output
+      ansible.builtin.debug:
+        var: calculator_output.stdout
