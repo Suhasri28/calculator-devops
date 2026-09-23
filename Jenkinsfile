@@ -12,25 +12,25 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn clean compile'
+                bat 'wsl bash -lc "cd /mnt/c/ProgramData/Jenkins/.jenkins/workspace/calculator-pipeline && mvn clean compile"'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'mvn test'
+                bat 'wsl bash -lc "cd /mnt/c/ProgramData/Jenkins/.jenkins/workspace/calculator-pipeline && mvn test"'
             }
         }
 
         stage('Package') {
             steps {
-                sh 'mvn package'
+                bat 'wsl bash -lc "cd /mnt/c/ProgramData/Jenkins/.jenkins/workspace/calculator-pipeline && mvn package"'
             }
         }
 
         stage('Deploy') {
             steps {
-                sh 'ansible-playbook -i inventory deploy.yml'
+                bat 'wsl bash -lc "cd /mnt/c/ProgramData/Jenkins/.jenkins/workspace/calculator-pipeline && ansible-playbook -i inventory deploy.yml"'
             }
         }
     }
